@@ -1,5 +1,6 @@
 package facades;
 
+import dtos.ProjectDTO;
 import entities.Project;
 import org.junit.jupiter.api.*;
 import utils.EMF_Creator;
@@ -54,6 +55,13 @@ class ProjectFacadeTest {
 //        Remove any data after each test was run
     }
 
+    @Test
+    void create () {
+        Project project = new Project("TestProject","testDescription");
+        ProjectDTO actual   = projectFacade.create(new ProjectDTO(project));
+        assertTrue(actual.getId()!=0);
+        System.out.println(actual.getId()); //printer 3 ud.
+    }
 
     @Test
     public void testGetAll() throws Exception {

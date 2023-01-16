@@ -35,6 +35,20 @@ public class ProjectFacade {
     }
 
 
+    public ProjectDTO create(ProjectDTO ProjectDTO){
+        Project project = new Project(ProjectDTO.getName(), ProjectDTO.getDescription());
+
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(project);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new ProjectDTO(project);
+    }
+
     public List<ProjectDTO> getAll(){
         EntityManager em = emf.createEntityManager();
         TypedQuery<Project> query = em.createQuery("SELECT p FROM Project p", Project.class);

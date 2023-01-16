@@ -17,7 +17,6 @@ public class ProjectDTO  {
 
 
     public ProjectDTO(Project project) {
-
         if (project.getId() != null)
             this.id = project.getId();
         this.name = project.getName();

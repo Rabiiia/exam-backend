@@ -1,9 +1,12 @@
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dtos.ProjectDTO;
 import entities.Project;
 import entities.RenameMe;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
@@ -22,7 +25,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.*;
 
 public class ProjectResourceTest {
 
@@ -31,6 +34,8 @@ public class ProjectResourceTest {
     private static Project p1, p2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
+
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
 
@@ -66,7 +71,7 @@ public class ProjectResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        p1 = new Project("Batman", "Create a app with batmen");
+        p1 = new Project("nameTest", "DescriptionTest");
         p2 = new Project("Skill Up", "A web application");
         try {
             em.getTransaction().begin();
@@ -78,6 +83,25 @@ public class ProjectResourceTest {
         } finally {
             em.close();
         }
+    }
+
+
+    @Test
+    public void postTest() {
+        ProjectDTO pdto = new ProjectDTO(p1);
+        String requestBody = GSON.toJson(pdto);
+
+        given()
+                .header("Content-type", ContentType.JSON)
+                .and()
+                .body(requestBody)
+                .when()
+                .post("/project")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("name", equalTo("nameTest"));
     }
 
     @Test
