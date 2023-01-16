@@ -4,6 +4,7 @@ import entities.Project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A DTO for the {@link entities.Project} entity
@@ -47,5 +48,19 @@ public class ProjectDTO  {
                 "id = " + id + ", " +
                 "name = " + name + ", " +
                 "description = " + description + ")";
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ProjectDTO)) return false;
+        ProjectDTO that = (ProjectDTO) o;
+        return getId().equals(that.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }
