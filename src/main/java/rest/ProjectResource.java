@@ -8,11 +8,13 @@ import utils.EMF_Creator;
 
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
+/**
+ * @author lam@cphbusiness.dk
+ */
 @Path("project")
-public class ProjectResource  {
+public class ProjectResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
@@ -41,12 +43,20 @@ public class ProjectResource  {
         return Response.ok().entity(GSON.toJson(returned)).build();
     }
 
-
-    @Path("/all")
     @GET
+    @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAll() {
         return Response.ok().entity(GSON.toJson(PROJECT_FACADE.getAll())).build();
     }
+
+
+
+//    @Path("/populate")
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public void populate() {
+//        Populator.populate();
+//    }
 
 }

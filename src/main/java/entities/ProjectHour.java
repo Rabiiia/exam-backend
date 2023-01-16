@@ -6,8 +6,10 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "projectHours")
+@NamedQuery(name = "ProjectHour.deleteAllRows", query = "DELETE from ProjectHour ")
 public class ProjectHour {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "projectHours_id", nullable = false)
     private Integer id;
 
@@ -32,6 +34,17 @@ public class ProjectHour {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
     private Project project;
+
+    public ProjectHour() {
+    }
+
+    public ProjectHour(Integer hoursSpendt, String userStory, String description, Developer developer, Project project) {
+        this.hoursSpendt = hoursSpendt;
+        this.userStory = userStory;
+        this.description = description;
+        this.developer = developer;
+        this.project = project;
+    }
 
     public Integer getId() {
         return id;

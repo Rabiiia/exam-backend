@@ -73,4 +73,13 @@ public class ProjectFacade {
         return ProjectDTO.getDtos(projects);
     }
 
+    public List<ProjectDTO> getProjectsByDeveloperId(int id) {
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<Project> projectQuery = em.createQuery("SELECT p.developers FROM Project p WHERE p.id = :did", Project.class);
+        projectQuery.setParameter("did", id);
+        List<Project> boats = projectQuery.getResultList();
+        em.close();
+        return ProjectDTO.getDtos(boats);
+    }
+
 }

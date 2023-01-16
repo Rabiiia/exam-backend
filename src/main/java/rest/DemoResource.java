@@ -1,12 +1,8 @@
 package rest;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import dtos.ChuckDTO;
-import dtos.DadJokeDTO;
 import entities.User;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -19,11 +15,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
-import facades.Populator;
-import facades.ProjectFacade;
-import security.UserPrincipal;
-
-import externalAPIHandling.JokeFetcher;
 import utils.EMF_Creator;
 
 /**
@@ -82,19 +73,7 @@ public class DemoResource {
         return "{\"username\": \"" + thisuser + "\",\"role\":\"" + thisrole + "\"}";
     }
 
-    @GET
-    @Path("externalAPI/jokes")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getJokes() throws ExecutionException, InterruptedException {
 
-        List<Object> futureList= new ArrayList();
-        JokeFetcher jokeFetcher = new JokeFetcher();
-
-        futureList.add(jokeFetcher.getFutureJoke("https://api.chucknorris.io/jokes/random", ChuckDTO.class).get());
-        futureList.add(jokeFetcher.getFutureJoke("https://icanhazdadjoke.com", DadJokeDTO.class).get());
-
-        return gson.toJson(futureList);
-    }
 
 
 

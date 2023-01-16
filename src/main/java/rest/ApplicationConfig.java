@@ -26,7 +26,6 @@ public class ApplicationConfig extends Application {
         resources.add(errorhandling.GenericExceptionMapper.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.DemoResource.class);
-        resources.add(rest.RenameMeResource.class);
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.LoginEndpoint.class);
         resources.add(security.TokenEndpoint.class);
@@ -36,6 +35,9 @@ public class ApplicationConfig extends Application {
         //resources.add(externalAPIHandling.JokeFetcher.class);
         resources.add(rest.UserResource.class);
         resources.add(rest.ProjectResource.class);
+        resources.add(rest.DeveloperRessource.class);
+        resources.add(rest.ProjectHourRessource.class);
+
 
     }
     

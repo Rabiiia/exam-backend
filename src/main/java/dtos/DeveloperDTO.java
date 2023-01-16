@@ -1,8 +1,11 @@
 package dtos;
 
 import entities.Developer;
+import entities.Project;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A DTO for the {@link entities.Developer} entity
@@ -15,12 +18,6 @@ public class DeveloperDTO implements Serializable {
 
     private Integer billingPrHour;
 
-    public DeveloperDTO(Integer id, String name, String email, Integer billingPrHour) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.billingPrHour = billingPrHour;
-    }
 
     public DeveloperDTO(Developer developer) {
         if (developer.getId() != null)
@@ -28,6 +25,12 @@ public class DeveloperDTO implements Serializable {
         this.name = developer.getName();
         this.email = developer.getEmail();
         this.billingPrHour = developer.getBillingPrHour();
+    }
+
+    public static List<DeveloperDTO> getDtos(List<Developer> developers) {
+        List<DeveloperDTO> developerDTOS = new ArrayList();
+        developers.forEach(developer -> developerDTOS.add(new DeveloperDTO(developer)));
+        return developerDTOS;
     }
 
     public Integer getId() {
