@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
+import facades.Populator;
 import utils.EMF_Creator;
 
 /**
@@ -74,16 +75,11 @@ public class DemoResource {
     }
 
 
-
-
-
-
-
-//    @Path("/populate")
-//    @GET
-//    @Produces({MediaType.APPLICATION_JSON})
-//    public void populate() {
-//        Populator.populate();
-//    }
+    @Path("/populate")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public void populate() {
+        Populator.populate();
+    }
 
 }
