@@ -38,4 +38,10 @@ public class ProjectHourRessource {
         return Response.ok().entity(GSON.toJson(deleted)).build();
     }
 
+//    @GET
+//    @Produces({MediaType.APPLICATION_JSON})
+//    public Response getProjectHourByDeveloperIdAndProjectId(@QueryParam("id") int id, @QueryParam("developerId") int developerId) {
+//        System.out.println(id + " " + developerId);
+//        return Response.ok().entity(GSON.toJson(PROJECTHOUR_FACADE.getProjectsHourByDeveloperIdAndProjectId(id, developerId))).build();
+//    }
 }

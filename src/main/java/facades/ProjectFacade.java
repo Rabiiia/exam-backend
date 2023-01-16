@@ -73,6 +73,15 @@ public class ProjectFacade {
         return ProjectDTO.getDtos(projects);
     }
 
+//    //Her viser vi en liste af projekter igennem developer id
+//    public List<ProjectDTO> getProjectsByDeveloperId(int developerId) {
+//        EntityManager em = emf.createEntityManager();
+//        TypedQuery<Project> query = em.createQuery("SELECT p FROM Project p JOIN Developer d WHERE d.id=:developerId", Project.class);
+//        query.setParameter("developerId", developerId);
+//        List<Project> projects = query.getResultList();
+//        return ProjectDTO.getDtos(projects);
+//    }
+
 
 
 }

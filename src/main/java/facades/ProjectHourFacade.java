@@ -69,4 +69,23 @@ public class ProjectHourFacade {
         List<ProjectHour> projectHours = query.getResultList();
         return ProjectHourDTO.getDtos(projectHours);
     }
+
+
+    //jeg laver denne metode, fordi jeg vil gerne efter at have vist en liste af projekter via developer id - getProjectsByDeveloperId,
+    //så vil jeg derfra igennem den liste af projekter så finde den specifikke projekthours for den specifik developer id
+//    public List<ProjectHourDTO> getProjectsHourByDeveloperIdAndProjectId(int developerId, int projectId) {
+//        EntityManager em = emf.createEntityManager();
+//
+//        try {
+//            TypedQuery<ProjectHour> projectHourQuery = em.createQuery("SELECT ph FROM ProjectHour ph WHERE ph.developer.id=:developerId AND ph.id=:projectId", ProjectHour.class);
+//            projectHourQuery.setParameter("developerId", developerId);
+//            projectHourQuery.setParameter("projectId", projectId);
+//            List<ProjectHour> projects = projectHourQuery.getResultList();
+//            return ProjectHourDTO.getDtos(projects);
+//        } finally {
+//            em.close();
+//        }
+//
+//    }
+
 }

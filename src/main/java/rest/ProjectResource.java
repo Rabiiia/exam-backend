@@ -50,13 +50,15 @@ public class ProjectResource {
         return Response.ok().entity(GSON.toJson(PROJECT_FACADE.getAll())).build();
     }
 
-
-
-//    @Path("/populate")
 //    @GET
+//    @Path("/{id}")
 //    @Produces({MediaType.APPLICATION_JSON})
-//    public void populate() {
-//        Populator.populate();
+//    public Response getProjectsByDeveloperId(@PathParam("id") int id) {
+//
+//        return Response.ok().entity(GSON.toJson(PROJECT_FACADE.getProjectsByDeveloperId(id))).build();
 //    }
+
+
+
 
 }
