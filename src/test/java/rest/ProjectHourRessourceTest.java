@@ -83,9 +83,9 @@ public class ProjectHourRessourceTest {
 
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("ProjectHour.deleteAllRows").executeUpdate();
             em.createNamedQuery("Project.deleteAllRows").executeUpdate();
             em.createNamedQuery("Developer.deleteAllRows").executeUpdate();
-            em.createNamedQuery("ProjectHour.deleteAllRows").executeUpdate();
 
             em.persist(p1);
             em.persist(p1);

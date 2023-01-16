@@ -53,8 +53,8 @@ class ProjectHourFacadeTest {
 
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Project.deleteAllRows").executeUpdate();
             em.createNamedQuery("ProjectHour.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Project.deleteAllRows").executeUpdate();
             em.createNamedQuery("Developer.deleteAllRows").executeUpdate();
 
             em.persist(p1);
