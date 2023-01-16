@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("project")
-public class ProjectResource {
+public class ProjectResource  {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
 
@@ -29,8 +29,21 @@ public class ProjectResource {
         return Response.ok().entity(GSON.toJson(pNew)).build();
     }
 
-    @GET
+    @POST
+    @Path("{projectId}/developer/{developerId}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response addHarbourToBoat(@PathParam("projectId") int projectId, @PathParam("developerId") int developerId){
+        System.out.println(projectId + " " + developerId);
+        ProjectDTO returned = PROJECT_FACADE.addDeveloperToProject(projectId, developerId);
+        System.out.println(returned.toString());
+
+        return Response.ok().entity(GSON.toJson(returned)).build();
+    }
+
+
     @Path("/all")
+    @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response getAll() {
         return Response.ok().entity(GSON.toJson(PROJECT_FACADE.getAll())).build();

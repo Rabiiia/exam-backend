@@ -2,7 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.DeveloperDTO;
 import dtos.ProjectDTO;
+import entities.Developer;
 import entities.Project;
 import entities.RenameMe;
 import io.restassured.RestAssured;
@@ -32,6 +34,7 @@ public class ProjectResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
     private static Project p1, p2;
+    private static Developer d1, d2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
 
@@ -73,11 +76,14 @@ public class ProjectResourceTest {
         EntityManager em = emf.createEntityManager();
         p1 = new Project("nameTest", "DescriptionTest");
         p2 = new Project("Skill Up", "A web application");
+
+        d1 = new Developer("Ali","ali@email.com", 2);
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Project.deleteAllRows").executeUpdate();
             em.persist(p1);
             em.persist(p2);
+            em.persist(d1);
 
             em.getTransaction().commit();
         } finally {
@@ -87,7 +93,7 @@ public class ProjectResourceTest {
 
 
     @Test
-    public void postTest() {
+    public void postProjectTest() {
         ProjectDTO pdto = new ProjectDTO(p1);
         String requestBody = GSON.toJson(pdto);
 
@@ -97,6 +103,27 @@ public class ProjectResourceTest {
                 .body(requestBody)
                 .when()
                 .post("/project")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("id", notNullValue())
+                .body("name", equalTo("nameTest"));
+    }
+
+    @Test
+    public void postAddDeveloperToProjectTest() {
+        Project p = new Project(p1.getName(), p1.getDescription());
+        Developer d = new Developer(d1.getName(), d1.getEmail(), d1.getBillingPrHour());
+        p.getDevelopers().add(d);
+        ProjectDTO pdto = new ProjectDTO(p);
+        String requestBody = GSON.toJson(pdto);
+
+        given()
+                .header("Content-type", ContentType.JSON)
+                .and()
+                .body(requestBody)
+                .when()
+                .post("/project/" + p1.getId() + "/developer/" + d1.getId())
                 .then()
                 .assertThat()
                 .statusCode(200)

@@ -31,11 +31,22 @@ public class Developer {
     @OneToMany(mappedBy = "developer")
     private Set<ProjectHour> projectHours = new LinkedHashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "developer_project",
-            joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id"))
+    public Developer() {
+    }
+
+    public Developer(String name, String email, Integer billingPrHour) {
+        this.name = name;
+        this.email = email;
+        this.billingPrHour = billingPrHour;
+    }
+
+    @ManyToMany(mappedBy = "developers")
+//    @JoinTable(name = "developer_project",
+//            joinColumns = @JoinColumn(name = "developer_id"),
+//            inverseJoinColumns = @JoinColumn(name = "project_id"))
     private Set<Project> projects = new LinkedHashSet<>();
+
+
 
     public Integer getId() {
         return id;

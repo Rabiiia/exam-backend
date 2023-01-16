@@ -1,6 +1,7 @@
 package rest;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dtos.ChuckDTO;
 import dtos.DadJokeDTO;
 import entities.User;
@@ -13,15 +14,13 @@ import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.SecurityContext;
 
 import facades.Populator;
+import facades.ProjectFacade;
 import security.UserPrincipal;
 
 import externalAPIHandling.JokeFetcher;
@@ -96,6 +95,8 @@ public class DemoResource {
 
         return gson.toJson(futureList);
     }
+
+
 
 
 

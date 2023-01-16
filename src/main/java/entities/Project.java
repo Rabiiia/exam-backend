@@ -42,6 +42,7 @@ public class Project {
             inverseJoinColumns = @JoinColumn(name = "developer_id"))
     private Set<Developer> developers = new LinkedHashSet<>();
 
+
     public Integer getId() {
         return id;
     }
